@@ -1,0 +1,106 @@
+ <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cart</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f5f5f7;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .cart-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e1e1e1;
+        }
+        th {
+            background-color: #f9f9f9;
+        }
+        .btn-primary {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #0071e3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .btn-primary:hover {
+            background-color: #005bb5;
+        }
+        .quantity-input {
+            width: 50px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="cart-container">
+        <h1>Your Cart</h1>
+        <div th:if="${cart.items.size() == 0}">
+            <p>Your cart is empty</p>
+        </div>
+        <div th:unless="${cart.items.size() == 0}">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="cartItem : ${cart.items}">
+                        <td th:text="${cartItem.item.name}">Item Name</td>
+                        <td>
+                            <input type="number" class="quantity-input" min="1" th:value="${cartItem.quantity}" data-price="${cartItem.item.price}" onchange="updateTotal(this)">
+                        </td>
+                        <td th:text="${cartItem.item.price}">10.00</td>
+                        <td th:text="${#numbers.formatDecimal(cartItem.quantity * cartItem.item.price, 1, 'POINT', 2, 'COMMA')}">10.00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <form th:action="@{/cart/checkout}" method="post">
+            <button type="submit" class="btn btn-primary">Checkout</button>
+        </form>
+        <form th:action="@{/}" method="get">
+            <button type="submit" class="btn btn-primary">Go To Shop Home Page</button>
+        </form>        
+    </div>
+    
+    <script>
+        function updateTotal(input) {
+            const price = parseFloat(input.getAttribute('data-price'));
+            const quantity = parseInt(input.value);
+            const totalCell = input.parentElement.nextElementSibling.nextElementSibling;
+            const formattedTotal = (price * quantity).toFixed(2);
+            totalCell.textContent = formattedTotal;
+        }
+    </script>
+</body>
+</html>
+ 
