@@ -54,7 +54,9 @@ public class SecurityConfig {
 		
 		
 		
-		
+
+
+
 		
 		http.authorizeHttpRequests((authz)-> authz
 
@@ -62,19 +64,22 @@ public class SecurityConfig {
 			.requestMatchers(antMatcher("/addItem/**")).hasRole("BOSS")
 			.requestMatchers(antMatcher("/delete/**")).hasRole("BOSS")
 			
-			.requestMatchers(antMatcher("/email")).hasAnyRole("BOSS", "GUEST")
+		//	.requestMatchers(antMatcher("/email")).hasAnyRole("BOSS", "GUEST")
 
 
-			
-			
-			.requestMatchers(antMatcher("/")).permitAll()			
+								.requestMatchers(antMatcher("/email")).permitAll()
+
+
+								.requestMatchers(antMatcher("/")).permitAll()
 			.requestMatchers(antMatcher("/registration")).permitAll()
 			.requestMatchers(antMatcher(HttpMethod.POST, "/register")).permitAll()
 			.requestMatchers(antMatcher("/img/**")).permitAll()
 			.requestMatchers(antMatcher("/h2-console/**")).permitAll()
 			.requestMatchers(antMatcher("/css/**")).permitAll()
+			.requestMatchers(antMatcher("/rest/")).permitAll()
+						.requestMatchers(antMatcher("/rest")).permitAll()
 
-			.requestMatchers(antMatcher("/accountants/**")).permitAll()			
+						.requestMatchers(antMatcher("/accountants/**")).permitAll()
 			.requestMatchers(antMatcher("/view/**")).permitAll()			
 
 			.anyRequest().authenticated()

@@ -40,9 +40,9 @@ public class SecurityRepository {
 		MapSqlParameterSource parameters = new MapSqlParameterSource();
 		
 		
-		String query = "SELECT user_role.userId, sec_role.roleName "
-		+ "FROM user_role, sec_role WHERE "
-		+ "user_role.roleId=sec_role.roleId and userId=:id";
+		String query = "SELECT USER_ROLE.userId, SEC_ROLE.roleName "
+		+ "FROM USER_ROLE, SEC_ROLE WHERE "
+		+ "USER_ROLE.roleId=SEC_ROLE.roleId and userId=:id";
 		
 		
 		parameters.addValue("id", userId);
@@ -68,7 +68,7 @@ public class SecurityRepository {
 		
 		String encodedPassword = encoder.encode(password);
 			MapSqlParameterSource parameters = new MapSqlParameterSource();
-			String userPass = "INSERT INTO SEC_User(userName, encryptedPassword, ENABLED) "
+			String userPass = "INSERT INTO SEC_USER(userName, encryptedPassword, ENABLED) "
 					+ "VALUES " +
 			"(:username, :password, 1)";                         // instead of typing for all the value, we make a parameter to make the query add the value, and the below will be the advalue into the paramemters 
 			parameters.addValue("username", username);
