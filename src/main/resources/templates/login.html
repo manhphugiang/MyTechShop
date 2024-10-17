@@ -8,13 +8,9 @@
 </head>
 <body>
 
-
 <div th:if="${param.failed}" class="alert">
 	Invalid Username or Password
 </div>
-
-
-
 
 <form method="POST" th:action="@{/login}">
 	<label for="username">Username</label>

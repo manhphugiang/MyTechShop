@@ -69,6 +69,8 @@ public class SecurityConfig {
 
 								.requestMatchers(antMatcher("/email")).permitAll()
 
+								.requestMatchers(antMatcher("/cartRest/")).permitAll()
+								.requestMatchers(antMatcher("/cartRest")).permitAll()
 
 								.requestMatchers(antMatcher("/")).permitAll()
 			.requestMatchers(antMatcher("/registration")).permitAll()
@@ -91,7 +93,8 @@ public class SecurityConfig {
 		.formLogin(   (formLogin) -> formLogin 
 				.loginPage("/login")
 				.failureUrl("/login?failed")
-				.permitAll()
+
+						.permitAll()
 				)
 		
 		.logout(  	(logout) -> logout
