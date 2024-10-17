@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copy the Spring Boot jar file to the container
-COPY target/MyTechShop-0.0.1-SNAPSHOT.jar.original app.jar
+COPY target/MyTechShop-0.0.1-SNAPSHOT.jar app.jar
 
 # Expose the port that your Spring Boot app runs on
 EXPOSE 8080
