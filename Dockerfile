@@ -1,8 +1,7 @@
 # Use an official OpenJDK 17 runtime as a parent image
 FROM openjdk:17-jdk-slim
 
-# Set the working directory in the container
-WORKDIR /app
+MAINTAINER ca.project.giangma
 
 # Copy the Spring Boot jar file to the container
 COPY target/MyTechShop-0.0.1-SNAPSHOT.jar app.jar
