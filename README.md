@@ -29,6 +29,17 @@ Item Availability Notification: Sends an email when items are added or become av
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 The demoImage directory contains screenshots showcasing the application's features:
 
 
